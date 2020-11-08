@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">
+	<head>
+		<meta charset="UTF-8">	<!-- Specifies the character encoding for the HTML document -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Free Web tutorials for HTML and CSS">	<!-- Define a description of your web page -->
+		<meta name="keywords" content="HTML, CSS, JavaScript">	<!-- Define keywords for search engines -->
+		<meta name="author" content="John Doe">	<!-- Define the author of a page -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">	<!-- Setting the viewport to make your website look good on all devices -->
+		<!-- <meta http-equiv="refresh" content="30"> --> <!-- Refresh document every 30 seconds -->
+		<title>Title Of The Document</title> <!-- Title Of The Document(Website/Page) -->
+		<link rel="icon" href="" type="images/x-icon"> <!-- Icon/Logo Of The Document(Website/Page) -->
+		<link rel="stylesheet" type="text/css" href="css/style.css">	<!-- Externak CSS Link -->
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" /> -->	<!-- Font Awesome Icon Link -->
+
+		<link rel="stylesheet" type="text/css" href="bootstrap-4.5.3/css/bootstrap.min.css">	<!-- Include bootstrap CSS -->
+   		<!-- <script src="bootstrap-4.5.3/js/bootstrap.min.js"></script> -->	<!-- Include jQuery and bootstrap JS plugins -->
+
+   		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
+
+   		<!-- <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">  --> <!-- Animation On Scroll CDN Link -->
+   		<!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
+
+
+		<script type="text/javascript" src="js/app.js"></script>	<!-- External JavaSceipt Link -->
+		<script type="text/javascript" src="js/jquery/jquery-3.5.1.min.js"></script>	<!-- External JQuery File Link -->
+		<script type="text/javascript" src="js/angular/angular.min.js"></script>	<!-- External AngularJS File -->
+		<script type="text/javascript" src="js/modules/angular-route.min.js"></script>	<!-- External AngularJS Routing Module File -->
+		<script type="text/javascript" src="js/modules/angular-animate.min.js"></script>	<!-- External AngularJS Animate Module File -->
+
+
+		<!-- --------------------------------------------------Internal CSS Start-------------------------------------------------- -->
+		<!-- <style type="text/css">
+					
+		</style> -->
+		<!-- --------------------------------------------------Internal CSS End---------------------------------------------------- -->
+	</head>
+
+	<body>
+
+		<!-- <h1>Online Music Player</h1>{{5+5}} -->
+
+
+
+
+		<header>
+			<div class="container">
+				<div class="logo">
+				    <a href="#!/">Online Music Store</a>
+				</div>
+
+				<input class="hamburger-button" type="checkbox" id="hamburger-button" />
+				<label for="hamburger-button">
+				    <div></div>
+				</label>
+
+				<div class="menu">
+				    <nav>
+				        <ul>
+				            <li><a href="#/!" class="active">Home</a></li>
+							<li><a href="#!about">About</a></li>
+							<li><a href="https://skillsrouting.blogspot.com/" target="_blank">Blog</a></li>
+							<li><a href="#!portfolio">Portfolio</a></li>
+							<li><a href="#!contact">Contact</a></li>
+				        </ul>
+				    </nav>
+
+				    <div class="buttons">
+				        <a href="#!/sign_up" class="button primary">Sign Up</a>
+				        <a href="#!/log_in" class="button">Sign In</a>
+				    </div>
+				</div>
+			</div>
+		</header>
+
+
+
+
+
+		<!-- Page View	 -->
+			<div ng-view></div>
+
+
+
+		<!-- Player Section -->
+
+			<div class="playerContainer">
+				<div class="playerSection">
+					<div class="audioPlayer">
+
+
+						<div class="image_container">
+							<img src="images/Befikra.jpg" alt="Art">
+						</div>
+
+						<audio src="audio/Befikra - Meet Bros.mp3" id="aud"></audio>
+
+						<div class="musicDetail">
+							<div class="musicTitle"><i class="fa fa-music"></i><h4 id="title">Befikra - Meet Bross</h4></div>
+							<div class="musicArtist"><i class="fa fa-microphone"></i><h4 id="artist">Meet Bross, Aditi Singh Sharma</h4></div>
+							<div class="musicAlbum"><i class="fa fa-film"></i><h4 id="album">Befikra</h4></div>		
+						</div>
+
+
+						<div class="musicVolume">
+							<div class="VolumeContainer">
+								<i class="fa volume_icons volume-up" onclick="muteUnmute()" id="volbtn"> &#xf028; </i>
+								<input id="prgvol" type="range" min="0" max="100" value="100" oninput="volume(this.value)"/>
+								<div id="volume_value">100</div>
+							</div>
+						</div>
+
+						<div class="progressbar_container" id="progress_container">
+							<div class="progress_duration_meter">
+								<div id="current_time">0:00</div>
+								<div id="duration">5:51</div>
+							</div>
+
+							<div class="proggreesBar">
+								<div class="progress_div" id="progress_div">
+									<div class="progress" id="progress" style="height: 0.5rem; background: #3e3e3e"></div>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="music_controls">
+							<i class="fa fa-retweet" id="loop" title="Repeat"></i>
+							<i class="fa fa-backward" id="prev" title="Previous"></i>
+							<i class="fa fa-play main_button" id="play" title="Play"></i>
+							<i class="fa fa-forward" id="next" title="Next"></i>
+							<i class="fa fa-random" id="next" title="Random"></i>
+						</div>
+
+
+					</div>
+				</div>
+
+
+
+
+				<div class="playlistSection">
+					<div class="audioPlaylist">
+						<div class="playListType">
+							<div><i class="fa fa-film"></i>Album</div>
+							<div><i class="fa fa-music"></i>Song</div>
+							<div><i class="fa fa-microphone"></i>Artist</div>
+						</div>
+
+						<div class="songsList">
+							<ol ng-controller="myCtrl">
+								<li ng-repeat="x in songsList"><i class="fa fa-music" style="padding-right:.5rem;"></i>{{x}}</li>
+							</ol>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+
+
+
+			<div class="latestMusic">
+				
+				<div class="latestmusicType">
+					<div class="cardContainer">
+					 <h4>Latest Bollywood - Hindi Songs</h4>
+
+						 <div class="d-flex flex-row flex-nowrap overflow-auto">
+						      <div class="card card-block mx-2 c1 c0" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c2 c0" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c3" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c4" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c5" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c6" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c7" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c8" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c9" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c10" style="min-width: 300px; min-height: 300px;"></div>
+						               
+						</div>
+					</div>
+
+					<div class="cardContainer">
+					 <h4>Latest Hollywood - English Songs</h4>
+
+					 <div class="d-flex flex-row flex-nowrap overflow-auto">
+						      <div class="card card-block mx-2 c11" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c12" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c13" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c14" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c15" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c16" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c17" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c18" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c19" style="min-width: 300px; min-height: 300px;"></div>
+						      <div class="card card-block mx-2 c20" style="min-width: 300px; min-height: 300px;"></div>
+						               
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+
+
+
+	  <!-- //////////////////////////////////////////- Footer - Start -////////////////////////////////////////////// -->
+	    <footer>
+	      <div class="footerSection">
+	        <div class="footer_Contact">
+	          <div class="Contact_Details" data-aos="fade-up" style="overflow: hidden;">
+	          <h1 class="footer_Contact_Title" style="color: #fff;">Contact Us</h1>
+	            <p><i class="fa fa-whatsapp"></i>9161757683, 9284090368</p>
+	            <p><i class="fa fa-envelope-o" aria-hidden="true"></i></i>arshadsiddiqui36@gmail.com</p>
+	            <p><i class="fa fa-map-marker" aria-hidden="true"></i>Lovely Professional University (Punjab), India</p>
+	          </div>
+	        </div>
+
+	        <!-- //////////////////////////////Social Media///////////////////////////// -->
+	        <div class="SocialMedia_Section" data-aos="fade-up" style="overflow: hidden;">
+	          <h1 class="Follow_Us" style="color: #fff;">Follow Us</h1>
+	          <div class="SocialMedia_Links">
+	            <a href="https://www.facebook.com/arshad.siddiqui.52438" target="_blank"><i class="fa fa-facebook"></i></a>
+	            <a href="https://www.instagram.com/m.arshad.siddiqui/?hl=en" target="_blank"><i class="fa fa-instagram"></i></a>
+	            <a href="https://www.linkedin.com/in/mohammad-arsad-siddiqui-760a2616b/" target="_blank"><i class="fa fa-linkedin"></i></a>
+	            <a href="https://twitter.com/ArshadS03066909" target="_blank"><i class="fa fa-twitter"></i></a>
+	            <a href="https://in.pinterest.com/arshadsiddiqui36/pins/" target="_blank"><i class="fa fa-pinterest"></i></a>
+	          </div>
+	        </div>
+	      </div>
+
+	      <div class="Copyrights">
+	        <p><span style="margin: 2px">&copy;</span>Copyright 2019-2020 Online Music Store. All Rights Reserved</p>
+	        <!-- <small>&copy; Copyright {{currentYear}}, Example Corporation</small> -->
+	        <!-- var d = new Date();
+	        page.currentYear = d.getFullYear(); -->
+	      </div>
+	    </footer>
+	  <!-- //////////////////////////////////////////- Footer - End -//////////////////////////////////////////////// -->
+
+
+
+
+
+
+		<!-- Routing Script -->
+			<script>
+				var app = angular.module("myApp", ["ngRoute"]);
+
+				app.config(function($routeProvider) {
+				    $routeProvider
+				    .when("/", {
+				        title: 'home',
+			                    templateUrl: "pages/home.html"
+				        		// template : "<h1>Home Page</h1>"
+				    })
+				    .when("/about", {
+				    	title: 'about',
+			                    templateUrl: "pages/about.html"
+				        		// template : "<h1>About Page</h1>"
+				    })
+				    .when('/portfolio', {
+			                    title: 'portfolio',
+			                    templateUrl: "pages/portfolio.html"
+			                    // template : "<h1>Portfolio Page</h1>"
+			        })
+				    .when("/contact", {
+				    			title: 'contact',
+			                    templateUrl: "pages/contact.html"
+				        		// template : "<h1>Contact Page</h1>"
+				    })
+				    .when("/sign_up", {
+				    			title: 'sign_up',
+			                    templateUrl: 'pages/sign_up.html'
+				        		// template : "<h1>Sign Up Page</h1>"
+				    })
+				    .when("/log_in", {
+				    			title: 'sign_in',
+			                    templateUrl: 'pages/sign_in.html'
+				        		// template : "<h1>log In Page</h1>"
+				    })
+			        .otherwise({
+			                    templateUrl: "pages/notfound.html"
+			                    // redirectTo: 'pages/notfound.html'
+			                    // template : "<h1>Nothing</h1><p>Nothing has been selected</p>"
+			        });
+			                    
+				});
+
+
+
+				// app.controller('myCtrl', function($scope) {
+				//     $scope.showMe = false;
+				//     $scope.myFunc = function() {
+				//         $scope.showMe = !$scope.showMe;
+				//     }
+				// });
+
+
+
+				app.controller("myCtrl", function($scope) {
+
+				  $scope.songsList = [
+				    "01 Befikra",
+				    "02 Odhani - Made in China",
+				    "03 Sanedo - Made in China",
+				    "04 Aeroplane - Vibhor Parashar",
+				    "05 Khuda Haafiz (The Body)",
+				    "06 Chehre",
+				    "07 Ek Ladki Ko Dekha To Aisa Laga",
+				    "08 Kesari",
+				    "09 Luka Chuppi",
+				    "10 Kalank",
+				    "11 Gallan Teriya",
+				    "12 I Need Ya",
+				    "13 Tere Naal",
+				    "14 Peg Giney",
+				    "15 Total Dhamal",
+				    "16 Leja Re",
+				    "17 Let Me Love You",
+				    "18 Fergie",
+				    "19 Orange Carmel",
+				    "20 Do You Know",
+				  ]
+
+				});
+
+
+
+				// app.controller('myCtrl', function($scope, $http) {
+				//   $http.get("js/json.json")
+				//   .then(function(response) {
+				//     $scope.songsList = response.data;
+				//   });
+
+			</script>
+
+
+
+		
+		<!-- --------------------------------------------------Internal JavaScript Start------------------------------------------- -->
+			<script type="text/javascript">	//Internal JavaScript
+				const music = document.querySelector("audio");
+				const img = document.querySelector("img");
+				const play = document.getElementById("play");
+				const next = document.getElementById("next");
+				const prev = document.getElementById("prev");
+				const title = document.getElementById("title");
+				const artist = document.getElementById("artist");
+				const album = document.getElementById("album");
+
+				let isPlaying = false;
+
+				let progress = document.getElementById("progress");
+				let totalDuration = document.getElementById("duration");
+				let current_time = document.getElementById("current_time");
+				const progress_div = document.getElementById("progress_div");
+
+
+				const songs = [
+					{
+						title : "Odhani - Made in China",
+						artist : "Neha Kakkar, Darshan Raval",
+						album : "Made in China",
+						art : "Odhni",
+					},
+
+					{
+						title : "Sanedo - Made in China",
+						artist : "Mika Singh, Benny Dayal, Nikhita Gandhi",
+						album : "Made in China",
+						art : "Sanedo",
+					},
+
+					{
+						title : "Aeroplane - Vibhor Parashar",
+						artist : "Vibhor Prashar",
+						album : "Album",
+						art : "Aeroplane-mr-faisu",
+					},
+
+					{
+						title : "Khuda Haafiz (The Body)",
+						artist : "Arko, Arijit Singh",
+						album : "The Body",
+						art : "Khuda-haafiz",
+					},
+
+					{
+						title : "Befikra - Meet Bros",
+						artist : "Meet Bross, Aditi Singh Sharma",
+						album : "Befikra",
+						art : "Befikra",
+					},
+				];
+
+
+				//For Play Function
+				const playMusic = () => {
+					isPlaying = true;
+					music.play();
+					play.classList.replace("fa-play", "fa-pause");
+					img.classList.add("anime");
+				};
+
+				//For Pause Function
+				const pauseMusic = () => {
+					isPlaying = false;
+					music.pause();
+					play.classList.replace("fa-pause", "fa-play");
+					img.classList.remove("anime");
+				};
+
+				play.addEventListener('click', () => {
+					// if (isPlaying) {
+					// 	pauseMusic();
+					// }
+					// else {
+					// 	playMusic();
+					// }
+
+					isPlaying ? pauseMusic() : playMusic();
+				});
+
+
+				const loadSong = (songs) => {
+					title.textContent = songs.title;
+					artist.textContent = songs.artist;
+					album.textContent = songs.album;
+					img.src = "images/"+songs.art+".jpg";
+					music.src = "audio/"+songs.title+".mp3";
+				};
+
+				songsIndex = 0;
+				// loadSong(songs[2]);
+				const nextSong = () => {
+					songsIndex = (songsIndex + 1) % songs.length;
+					loadSong(songs[songsIndex]);
+					// playMusic();
+
+					if (isPlaying == true) {
+					 	playMusic();
+					 }
+					 else
+					 {
+					 	pauseMusic();
+					 }
+				};
+
+				const prevSong = () => {
+					songsIndex = (songsIndex - 1 + songs.length) % songs.length;
+					loadSong(songs[songsIndex]);
+					// playMusic();
+
+					 if (isPlaying == true) {
+					 	playMusic();
+					 }
+					 else
+					 {
+					 	pauseMusic();
+					 }
+					
+				};
+
+
+
+				// Progress Bar JS Work....................................
+
+				music.addEventListener('timeupdate', (event) => {
+					// console.log(event);
+					const { currentTime, duration } = event.srcElement;
+					// console.log(currentTime, duration);
+
+					let progress_time = (currentTime / duration) * 100;
+					// console.log(progress_time);
+					progress.style.width = `${progress_time}%`;
+
+
+					// Music Duration Update...............................
+					// console.log(duration);
+					let min_duration = Math.floor(duration / 60);
+					let sec_duration = Math.floor(duration % 60);
+					// console.log(min_duration);
+					// console.log(sec_duration);
+
+					let total_duration = `${min_duration}:${sec_duration}`;
+					if(duration) {
+						totalDuration.textContent = `${total_duration}`;
+					}
+
+					// Current Music Duration Update........................
+					let min_currentTime = Math.floor(currentTime / 60);
+					let sec_currentTime = Math.floor(currentTime % 60);
+
+					if(sec_currentTime < 10) {
+						sec_currentTime = `0${sec_currentTime}`;
+					}
+
+					let total_currentTime = `${min_currentTime}:${sec_currentTime}`;
+						current_time.textContent = `${total_currentTime}`;
+				});
+
+
+				// Progress onClick functionality
+				progress_div.addEventListener('click', (event) => {
+					// console.log(event);
+					const { duration } = music;
+					// const duration = music.duration;
+					let move_progress = (event.offsetX / event.srcElement.clientWidth) * duration;
+					// console.log(duration);
+					// console.log(move_progress);
+
+					music.currentTime = move_progress;
+				})
+
+				// If music end then call nextSong function
+				music.addEventListener("ended", nextSong);
+
+
+				next.addEventListener('click', nextSong);
+				prev.addEventListener('click', prevSong);
+
+
+
+
+
+
+				var volbtn = document.getElementById("volbtn");
+
+				var audio = document.getElementById("aud");
+
+				var valume_value = document.getElementById("volume_value");
+
+				// Volume Controler ...................................
+
+				function volume(val) {
+					var av = audio.volume = val / 100;
+					// console.log(av);
+
+					valume_value.innerHTML = val;
+
+
+					if(av == 0.0) {
+						// console.log(av);
+						// console.log("Silent");
+						// volbtn.classList.toggle("volume-mute");
+						volbtn.innerHTML = "&#xf026;";
+					}
+					else if(av <= 0.5){
+						// console.log("Medium");
+						// volbtn.classList.toggle("volume-down");
+						volbtn.innerHTML = "&#xf027;";
+					}
+					else{
+						// 1.0
+						// console.log("High");
+						// volbtn.classList.toggle("volume-up");
+						volbtn.innerHTML = "&#xf028;";
+					}
+				}
+
+				// Mute & Unmute ......................................
+
+				function muteUnmute() {
+
+					// volbtn.classList.toggle("volume-mute");
+
+					if(audio.muted == false) {
+						// console.log("Mute");
+						audio.muted = true;
+						volbtn.innerHTML = "&#xf026;";
+					}
+					else {
+						// console.log("Unmute");
+						audio.muted = false;
+						volbtn.innerHTML = "&#xf028;";
+					}
+					
+				}
+
+
+
+
+
+				$(document).ready(function(){
+				  // $("a").click(function(){
+				  //   // alert("Checked.");
+				  //   $("#hamburger-button").attr("checked","true");
+
+				  // });
+
+
+				  $(function () {
+					  "use strict";
+					  
+					  function uncheckBox() {
+					    var isChecked = $("#hamburger-button").prop("checked");
+					    if (isChecked) {
+					      $("#hamburger-button").prop("checked", false);
+					    }
+					  }
+					  
+					  $("a").on("click", function () {
+					    uncheckBox();
+					  });
+					  
+					  $("#hamburger-button").on("click", function (e) {
+					    e.stopPropagation();
+					  });
+					});
+
+
+
+
+
+				 $(function() {
+				 	"use strict";
+
+				      $('nav ul li a, button').on('click', function() {
+				            $("a").parent().find('a.active').removeClass('active');
+				            $(this).addClass( 'active' );
+				      });
+					});
+
+				});
+
+
+
+
+
+
+			</script>
+
+
+			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+		<!-- --------------------------------------------------Internal JavaScript End--------------------------------------------- -->
+
+	</body>
+</html>
